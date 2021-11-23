@@ -1,0 +1,90 @@
+﻿@model SchoolManagementSystem.Models.TeacherCourseStudent
+
+<form method="post" asp-action="Create">
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-info pl-3">Add TeacherCourseStudent Information</h2>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                @*<div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="StudentId"></label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="StudentId" class="form-control" />
+                            <span asp-validation-for="StudentId" class="text-danger"></span>
+                        </div>
+
+                    </div>*@
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="TeacherCourseStudentSection"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="TeacherCourseStudentSection" class="form-control" />
+                        <span asp-validation-for="TeacherCourseStudentSection" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="TeacherId"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="TeacherId" class="form-control" />
+                        <span asp-validation-for="TeacherId" class="text-danger"></span>
+                      @*  @Html.ValidationMessageFor(m => m.TeacherId)*@
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="StudentId"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="StudentId" class="form-control" />
+                        <span asp-validation-for="StudentId" class="text-danger"></span>
+                     @*   @Html.ValidationMessageFor(m => m.StudentId)*@
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="CourseId"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="CourseId" class="form-control" />
+                        <span asp-validation-for="CourseId" class="text-danger"></span>
+                        @*@Html.ValidationMessageFor(m => m.CourseId)*@
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+
+                        <div class="col">
+                            <input type="submit" class="btn btn-info w-100" value="Create" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success w-100">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                @* Keep this empty *@
+            </div>
+        </div>
+
+
+    </div>
+</form>
+
+@section Scripts{
+
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+}

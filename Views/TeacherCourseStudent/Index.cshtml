@@ -1,0 +1,70 @@
+﻿@model IEnumerable<SchoolManagementSystem.Models.TeacherCourseStudent>
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">TeacherCourseStudent List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-controller="TeacherCourseStudent" asp-action="Create" class="btn btn-success">
+                Add New TeacherCourseStudent
+            </a>
+        </div>
+    </div>
+
+    <br /><br />
+
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        TeacherCourseStudentId
+                    </th>
+                    <th>
+                        TeacherCourseStudentSection
+                    </th>
+                    <th>
+                        TeacherId
+                    </th>
+                    <th>
+                        StudentId
+                    </th>
+                    <th>
+                        CourseId
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td width="15%">@obj.TeacherCourseStudentId</td>
+                        <td width="15%">@obj.TeacherCourseStudentSection</td>
+                        <td width="10%">@obj.TeacherId</td>
+                        <td width="10%">@obj.StudentId</td>
+                        <td width="10%">@obj.CourseId</td>
+                        <td class="text-center">
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller="TeacherCourseStudent" asp-route-Id="@obj.TeacherCourseStudentId" asp-action="Edit" class="btn btn-primary mx-1">
+                                    Edit
+                                </a>
+                                <br />
+                                <a asp-controller="TeacherCourseStudent" asp-route-Id="@obj.TeacherCourseStudentId" asp-action="Delete" class="btn btn-danger mx-1">
+                                    Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No TeacherCourseStudent Exits</p>
+    }
+</div>

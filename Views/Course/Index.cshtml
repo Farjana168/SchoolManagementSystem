@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SchoolManagementSystem.Models.CourseTable>
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Course List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-controller="Course" asp-action="Create" class="btn btn-success">
+                 Create New Course
+            </a>
+        </div>
+    </div>
+
+    <br /><br />
+
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        CourseId
+                    </th>
+                    <th>
+                        CourseName
+                    </th>
+                    <th>
+                        CourseDuration
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                <tr>
+                    <td width="20%">@obj.CourseId</td>
+                    <td width="30%">@obj.CourseName</td>
+                    <td width="20%">@obj.CourseDuration</td>
+                    <td class="text-center">
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Course" asp-route-Id="@obj.CourseId" asp-action="Edit" class="btn btn-primary mx-2">Edit
+                            </a>
+                            <a asp-controller="Course" asp-route-Id="@obj.CourseId" asp-action="Delete" class="btn btn-danger mx-2">Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+            </table>
+    }
+    else
+    {
+        <p>No Course Exits</p>
+    }
+    </div>
