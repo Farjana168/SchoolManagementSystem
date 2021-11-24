@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolManagementSystem.Data;
+using SchoolManagementSystem.GenericRepo;
 using SchoolManagementSystem.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,112 @@ namespace SchoolManagementSystem.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly MyDbContext _db;
+        private IRepository<StudentTable> repo = null;
+        /*private IRepository Repository { get; set; }*/
+
+        /*public CourseController()
+        {
+            this.repo = new Repository<CourseTable>();
+        }*/
+
+        public StudentController(IRepository<StudentTable> repoi)
+        {
+            this.repo = repoi;
+        }
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            var model = repo.GetAll();
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(StudentTable model)
+        {
+            if (ModelState.IsValid)
+            {
+                repo.Insert(model);
+                repo.Save();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            StudentTable model = repo.GetById(id);
+            return View(model);
+        }
+
+        [HttpPost]
+
+        public ActionResult Edit(StudentTable model)
+        {
+            if (ModelState.IsValid)
+            {
+                repo.Update(model);
+                repo.Save();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        [HttpGet]
+
+        public ActionResult Delete(int id)
+        {
+            StudentTable model = repo.GetById(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult DeletePost(int id)
+        {
+            repo.DeletePost(id);
+            repo.Save();
+            return RedirectToAction("Index");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*private readonly MyDbContext _db;
 
         public StudentController(MyDbContext db)
         {
@@ -111,7 +217,7 @@ namespace SchoolManagementSystem.Controllers
             _db.StudentTable.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
 
     }
 }

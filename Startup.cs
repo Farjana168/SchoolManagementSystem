@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SchoolManagementSystem.Data;
+using SchoolManagementSystem.GenericRepo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace SchoolManagementSystem
             options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
             services.AddControllersWithViews();
         }
 
