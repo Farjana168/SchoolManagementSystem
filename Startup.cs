@@ -31,6 +31,7 @@ namespace SchoolManagementSystem
                 Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews();
         }
 

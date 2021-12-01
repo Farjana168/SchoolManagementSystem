@@ -11,13 +11,78 @@ namespace SchoolManagementSystem.Controllers
 {
     public class StudentController : Controller
     {
-        private IRepository<StudentTable> repo = null;
-        /*private IRepository Repository { get; set; }*/
+        private readonly IUnitOfWork _uow;
 
-        /*public CourseController()
+        public StudentController(IUnitOfWork uow)
         {
-            this.repo = new Repository<CourseTable>();
-        }*/
+            _uow = uow;
+        }
+        public ActionResult Index()
+        {
+            var model = _uow.studentrepo.GetAll();
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(StudentTable model)
+        {
+            if (ModelState.IsValid)
+            {
+                _uow.studentrepo.Insert(model);
+                _uow.Save();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public ActionResult Edit(int id)
+        {
+            StudentTable model = _uow.studentrepo.GetById(id);
+            return View(model);
+        }
+        [HttpPost]
+
+        public ActionResult Edit(StudentTable model)
+        {
+            if (ModelState.IsValid)
+            {
+                _uow.studentrepo.Update(model);
+                _uow.Save();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        [HttpGet]
+
+        public ActionResult Delete(int id)
+        {
+            StudentTable model = _uow.studentrepo.GetById(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult DeletePost(int id)
+        {
+            _uow.studentrepo.DeletePost(id);
+            _uow.Save();
+            return RedirectToAction("Index");
+        }
+
+
+
+
+
+
+
+
+        /*private IRepository<StudentTable> repo = null;
 
         public StudentController(IRepository<StudentTable> repoi)
         {
@@ -84,7 +149,7 @@ namespace SchoolManagementSystem.Controllers
             repo.Save();
             return RedirectToAction("Index");
         }
-
+*/
 
 
 

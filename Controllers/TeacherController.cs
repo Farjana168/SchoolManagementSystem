@@ -13,13 +13,80 @@ namespace SchoolManagementSystem.Controllers
     {
 
 
-        private IRepository<TeacherTable> repo = null;
-        /*private IRepository Repository { get; set; }*/
+
+        private readonly IUnitOfWork _uow;
+
+        public TeacherController(IUnitOfWork uow)
+        {
+            _uow = uow;
+        }
+        public ActionResult Index()
+        {
+            var model = _uow.teacherrepo.GetAll();
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(TeacherTable model)
+        {
+            if (ModelState.IsValid)
+            {
+                _uow.teacherrepo.Insert(model);
+                _uow.Save();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public ActionResult Edit(int id)
+        {
+            TeacherTable model = _uow.teacherrepo.GetById(id);
+            return View(model);
+        }
+        [HttpPost]
+
+        public ActionResult Edit(TeacherTable model)
+        {
+            if (ModelState.IsValid)
+            {
+                _uow.teacherrepo.Update(model);
+                _uow.Save();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        [HttpGet]
+
+        public ActionResult Delete(int id)
+        {
+            TeacherTable model = _uow.teacherrepo.GetById(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult DeletePost(int id)
+        {
+            _uow.teacherrepo.DeletePost(id);
+            _uow.Save();
+            return RedirectToAction("Index");
+        }
+
+
+
+        /* private IRepository<TeacherTable> repo = null;
+         *//*private IRepository Repository { get; set; }*/
 
         /*public CourseController()
         {
             this.repo = new Repository<CourseTable>();
-        }*/
+        }*//*
 
         public TeacherController(IRepository<TeacherTable> repo)
         {
@@ -87,7 +154,7 @@ namespace SchoolManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
-
+*/
 
 
 
